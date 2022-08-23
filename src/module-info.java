@@ -1,0 +1,2 @@
+module practico1 {
+}
