@@ -8,145 +8,137 @@ import java.time.Month;
 
 public class Persona {
 	
-	String name = "N";
-	String gender = "femenino";
-	LocalDate dateOfBirth = LocalDate.of(2000,1,1);
-	int age = 22;
+	String name;
+	String gender;
+	LocalDate dateOfBirth;
+	int age;
 	int dni;
-	double weight = 1;
-	double height = 1;
+	double weight;
+	double height;
 	
 	public Persona(int dni) {
-		this.dni = dni;
+		this(dni,"N");
 	
 	}
 	
 
 
 	public Persona(int dni, String name) {
-		
-		this.name = setName(name);
-		this.dni = dni;	
+		this(dni,name,"Femenino");
 		
 	}
 	public Persona(int dni, String name, String gender) {
-		this.gender = setGender(gender);
-		this.name = setName(name);
-		this.dni = dni;	
+		
+		this(dni,name,gender, 1);
 		
 	}
-	public Persona(int dni, String name, String gender, int age) {
-		this.age = setAge(age);
-		this.gender = setGender(gender);
-		this.name = setName(name);
-		this.dni = dni;
-			
-	}
-	public Persona(int dni, String name, String gender, int age, double weight) {
+
+	public Persona(int dni, String name, String gender, double weight) {
 		
-		this.weight = setWeight(weight);
-		this.age = setAge(age);
-		this.gender = setGender(gender);
-		this.name = setName(name);
-		this.dni = dni;
-			
+		this(dni,name,gender,weight,1);
+		
 	}
-	public Persona(int dni, String name, String gender, int age, double weight, double height, LocalDate dateOfBirth) {
+		
+	public Persona(int dni, String name, String gender, double weight, double height) {
+		
+		this(dni,name,gender,weight,height, LocalDate.of(2000,1,1));
+				
+		}
+			
+	
+	public Persona(int dni, String name, String gender, double weight, double height, LocalDate dateOfBirth) {
 		
 		this.dateOfBirth = setdateOfBirth(dateOfBirth);
 		this.height = setHeight(height);
-		this.weight = setWeight(weight);
-		this.age = setAge(age);
+		this.weight = setWeight(weight);	
 		this.gender = setGender(gender);
 		this.name = setName(name);
 		this.dni = dni;
 			
 	}
 	
-	public Persona(int dni, String name, String gender, int age, double weight, double height) {
-		
-		this.height = setHeight(height);
-		this.weight = setWeight(weight);
-		this.age = setAge(age);
-		this.gender = setGender(gender);
-		this.name = setName(name);
-		this.dni = dni;
-			
-	}
+	
 	//SETS
-	public LocalDate setdateOfBirth(LocalDate dateOfBirth) {
-		int año = dateOfBirth.getYear();
-		int dia = dateOfBirth.getDayOfMonth();
-		int mes = dateOfBirth.getMonthValue();
-		
-		if(año<0 || (mes<= 0 || mes>12) || (dia<= 0 || dia>31)) {
-			 dateOfBirth = LocalDate.of(2000,1,1);
-		} 
-		
-		
+	public LocalDate setdateOfBirth(LocalDate dateOfBirth) { 
 		return dateOfBirth;
 	}
 	
 	public double setHeight(double height) {
-		return setWeight(height);
+		
+		return height;
 	}
 	
 
 	public double setWeight(double weight) {
-		if(weight < 0) {
-			weight = 1;
-		}
-		
+
 		return weight;
 		
 	}
 	
 	public String setGender(String gender) {
-		gender = gender.toLowerCase();
-		
-		if(gender.isEmpty() || (!gender.equals("femenino") && !gender.equals("masculino"))) {
-			gender = "femenino";
-		}
-		
 		return gender;
 		
 		
 	}
 	
 	public String setName(String name) {
-		
-		if(name.isEmpty()) {
-			name = "N";
-		}
 		return name;
 	}
 	
-	public int setAge(int age){
-		if(age < 0) {
-			age = 22;
-		}
-		
+	
+	//GETERS
+	public int getDni() {
+		return dni;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+
+
+	public int getAge() {
 		return age;
 	}
+
+
+
+	public double getWeight() {
+		return weight;
+	}
+
+
+
+	public double getHeight() {
+		return height;
+	}
+
+	//show this information  
 	
-	
-	//show this information 
-	public void desplegarInfo() {
+	//METODOS
+	public String desplegarInfo() {
 		
-		System.out.println("Nombre: " + name);
-		System.out.println("Edad: " + age);
-		System.out.println("Fecha de Nacimiento: " + dateOfBirth);
-		System.out.println("Genero: " + gender);
-		System.out.println("DNI: " + dni);
-		System.out.println("Peso: " + weight);
-		System.out.println("Altura: " + height);
+		return  name + "-" + age + "-" + gender + "-" + dni + "-" + weight + "-" + height + "-" + dateOfBirth;
+		
 		
 	}
 	
 	public double masaCorporal() {
 		double indiceCorporal;
 		
-		indiceCorporal = weight / (Math.pow(height, 2));
+		indiceCorporal = getWeight() / (Math.pow(getHeight(), 2));
 		
 		return indiceCorporal;
 		
@@ -159,16 +151,16 @@ public class Persona {
 	}
 
 	public boolean esMayorEdad() {
-		return age >= 18;
+		return getAge() >= 18;
 	}
 	
 	public boolean puedeVotar() {
-		return age > 16;
+		return getAge() > 16;
 	}
 	
 	public boolean estaCumpliendoAños() {
-		int dia = dateOfBirth.getDayOfMonth();
-		int mes = dateOfBirth.getMonthValue();
+		int dia = getDateOfBirth().getDayOfMonth();
+		int mes = getDateOfBirth().getMonthValue();
 		
 		LocalDate hoy = LocalDate.now();
 	
